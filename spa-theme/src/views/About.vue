@@ -1,12 +1,27 @@
 <template>
   <div class="page-content">
-    <h1>This is an about page</h1>
+    <PageTitle page-slug="about" />
   </div>
 </template>
 
 <script>
-	export default {
-    name: "about"
-  }
+  // @ is an alias to /src
+  import NavBar from "@/components/Navbar.vue";
+  import PageTitle from "@/components/PageTitle.vue";
+
+  export default {
+    name: "about",
+    components: {
+      NavBar,
+      PageTitle
+    },
+  };
 </script>
- 
+
+<style lang="scss">
+  .quote{
+    margin-top: 15px;
+    font-style: italic;
+    font-size: 0.875rem;
+  }
+</style>

@@ -1,7 +1,9 @@
 <template>
-  <div class="page-content home">
-    <PageTitle page-slug="home" />
-    <NavBar />
+  <div class="page-container">
+    <div class="page-content home">
+      <PageTitle page-slug="home" />
+      <NavBar />
+    </div>
   </div>
 </template>
 
@@ -28,6 +30,11 @@ export default {
 </script>
 
 <style lang="scss">
+  .page-container{
+    height: 100vh;
+    position: relative;
+  }
+
   .page-content.home{
     position: absolute;
     top: 50%;

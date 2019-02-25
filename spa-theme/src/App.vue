@@ -31,7 +31,12 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 .page-content h1,.page-content h4{
   color: #FFF;
+}
+
+.page-content:not(.home){
+  padding: 50px 0;
 }
 </style>

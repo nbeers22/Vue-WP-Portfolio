@@ -57,14 +57,17 @@ export default {
   .navbar-light .navbar-nav .nav-link{
     font-weight: bold;
     color: #FFF;
-    transition: color 0.2s ease-in-out;
+    border: 2px solid transparent;
+    transition: all 0.2s ease-in-out;
 
     &.router-link-exact-active {
       color: #42b983;
+      border-color: #42b983;
     }
 
     &:hover{
       color: #42b983;
+      border-color: #42b983;
     }
   }
 </style>
