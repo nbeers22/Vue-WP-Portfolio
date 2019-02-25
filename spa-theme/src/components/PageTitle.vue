@@ -40,7 +40,7 @@ export default {
 
   .green-underline{
       width: 120px;
-      border-bottom: 3px solid #42b983;
+      border-bottom: 2px solid #42b983;
       margin: 20px auto 30px;
   }
   
