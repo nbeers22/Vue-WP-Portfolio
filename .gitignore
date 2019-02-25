@@ -1,0 +1,22 @@
+spa-theme/.DS_Store
+spa-theme/node_modules
+spa-theme/dist
+spa-theme/
+spa-theme/# local env files
+spa-theme/.env.local
+spa-theme/.env.*.local
+spa-theme/
+spa-theme/# Log files
+spa-theme/npm-debug.log*
+spa-theme/yarn-debug.log*
+spa-theme/yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
