@@ -9,7 +9,9 @@
             <div class="overlay"></div>
             <aside class="project-meta">
               <h2 class="project-title">{{ project.title.rendered }}</h2>
-              <a href="#!"><button class="btn btn-primary">View Project</button></a>
+              <div class="project-btn">
+                <a href="#!"><button class="btn btn-primary">View Project</button></a>
+              </div>
             </aside>
           </div>
         </div>
@@ -74,11 +76,18 @@
      
       .overlay{
         background-color: rgba(0,0,0,0.8);
+        border-color: #42b983;
       }
 
-      .project-meta{
+      .project-title{
         opacity: 1;
-        top: 50%;
+        top: 38%;
+        transform: translateY(-50%);
+      }
+
+      .project-btn{
+        opacity: 1;
+        bottom: 28%;
         transform: translateY(-50%);
       }
     }
@@ -88,16 +97,31 @@
       height: 100%;
       width: 100%;
       background-color: transparent;
+      border: 2px solid transparent;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .project-title{
+      position: absolute;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      transform: translateY(0);
+      transition: all 0.25s ease-in-out;
+    }
+
+    .project-btn{
+      bottom: 0;
+      width: 100%;
+      position: absolute;
+      transform: translateY(0);
+      transition: all 0.25s ease-in-out;
+      opacity: 0;
     }
 
     .project-meta{
       width: 100%;
-      position: absolute;
-      top: 0;
-      transform: translateY(0);
       text-align: center;
-      opacity: 0;
-      transition: all 0.25s ease-in-out;
 
       h2{
         color: #FFF;
@@ -108,10 +132,17 @@
         background-color: #42b983;
         font-weight: bold;
         text-transform: uppercase;
-        border: 0;
+        border: 2px solid transparent;
         border-radius: 25px;
         padding: 10px 30px;
         letter-spacing: 1px;
+        transition: all 0.25s ease-in-out;
+
+        &:hover{
+          border-color: #42b983;
+          background-color: #FFF;
+          color: #42b983;
+        }
       }
     }
 
