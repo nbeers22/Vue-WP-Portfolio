@@ -10,7 +10,7 @@
             <aside class="project-meta">
               <h2 class="project-title">{{ project.title.rendered }}</h2>
               <div class="project-btn">
-                <a href="#!"><button class="btn btn-primary">View Project</button></a>
+                <router-link :to="'projects/' + project.slug"><button class="btn btn-primary">View Project</button></router-link>
               </div>
             </aside>
           </div>
