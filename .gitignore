@@ -1,15 +1,15 @@
-spa-theme/.DS_Store
-spa-theme/node_modules
-spa-theme/dist
-spa-theme/
-spa-theme/# local env files
-spa-theme/.env.local
-spa-theme/.env.*.local
-spa-theme/
-spa-theme/# Log files
-spa-theme/npm-debug.log*
-spa-theme/yarn-debug.log*
-spa-theme/yarn-error.log*
+.DS_Store
+node_modules
+dist
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Editor directories and files
 .idea
