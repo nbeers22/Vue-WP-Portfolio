@@ -45,8 +45,8 @@ export default new Router({
       component: NotFound
     }
   ],
-  mode: "history",
-  base: "",
+  // mode: "history",
+  // base: "",
   // Prevents window from scrolling back to top
   // when navigating between components/views
   scrollBehavior(to, from, savedPosition) {

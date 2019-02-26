@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <h1 class="page-title">{{ pageTitle }}</h1>
-    <aside class="green-underline" v-if="pageTitle !== ''"></aside>
-    <h4 class="page-subhead" v-html="pageSubhead" v-if="pageSubhead"></h4>
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <h1 class="page-title">{{ pageTitle }}</h1>
+      <aside class="green-underline" v-if="pageTitle !== ''"></aside>
+      <h4 class="page-subhead" v-html="pageSubhead" v-if="pageSubhead"></h4>
+    </div>
   </div>
 </template>
 
