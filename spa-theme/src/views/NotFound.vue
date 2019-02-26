@@ -1,31 +1,17 @@
 <template>
   <div class="page-container">
     <div class="page-content home">
-      <PageTitle page-slug="home" />
-      <NavBar />
-      <SocialLinks v-on:loaded="socialLoaded = true" />
+      <h1>404</h1>
+      <h3>Page Not Found</h3>
+      <router-link :to="'/'"><button class="btn-btn-primary">Go Home</button></router-link>
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import SocialLinks from "@/components/SocialLinks.vue";
-import PageTitle from "@/components/PageTitle.vue";
-import NavBar from "@/components/Navbar.vue";
 
 export default {
-  name: "home",
-  components: {
-    SocialLinks,
-    PageTitle,
-    NavBar,
-  },
-  data(){
-    return{
-      socialLoaded: false
-    }
-  },
+  name: "notfound"
 };
 </script>
 

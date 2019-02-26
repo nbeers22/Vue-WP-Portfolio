@@ -5,6 +5,7 @@ import About     from "./views/About.vue";
 import Contact   from "./views/Contact.vue";
 import Portfolio from "./views/Portfolio.vue";
 import Post      from "./views/Post.vue";
+import NotFound  from "./views/NotFound.vue";
 
 Vue.use(Router);
 
@@ -37,6 +38,22 @@ export default new Router({
       path: "/projects/:postSlug",
       name: "Post",
       component: Post
+    },
+    { 
+      path: '*',
+      name: "notfound",
+      component: NotFound
     }
-  ]
+  ],
+  mode: "history",
+  base: "",
+  // Prevents window from scrolling back to top
+  // when navigating between components/views
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
 });

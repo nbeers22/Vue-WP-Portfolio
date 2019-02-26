@@ -1,14 +1,20 @@
 <template>
   <div class="page-content">
-    <!-- <PageTitle page-slug="portfolio" /> -->
-
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <img :src="post._embedded['wp:featuredmedia'][0].source_url" :alt="post.title">
-          <h1>{{ post.title.rendered }}</h1>
-          <div class="post-content" v-html="post.content.rendered"></div>
-          <router-link :to="'/portfolio'"><button class="btn btn-primary">Back to Portfolio</button></router-link>
+          <img :src="post._embedded['wp:featuredmedia'][0].source_url" :alt="post.title" style="margin-bottom:50px">
+          <h1 style="margin-bottom:20px">{{ post.title.rendered }}</h1>
+          <div class="project-link">
+            <a :href="post.acf.project_link" target="_blank">{{ post.acf.project_button_text }}</a>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="post-content" v-html="post.content.rendered"></div>
+              <router-link :to="'/portfolio'"><button class="btn btn-primary"><font-awesome-icon icon="arrow-left" /> &nbsp;Back</button></router-link>
+            </div>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -54,7 +60,7 @@
 </script>
 
 <style lang="scss">
-  .btn-primary{
+  .page-content .btn-primary{
     background-color: #42b983;
     font-weight: bold;
     text-transform: uppercase;
@@ -68,6 +74,27 @@
       border-color: #42b983;
       background-color: #FFF;
       color: #42b983;
+    }
+  }
+
+  .post-content{
+    margin: 30px 0;
+
+    p,span,div,li,a{
+      color: #FFF;
+    }
+  }
+
+  .project-link a, .post-content a{
+    text-decoration: none;
+    border-bottom: 1px solid #FFF;
+    transition: all 0.25s ease-in-out;
+    color: #FFF;
+
+    &:hover{
+      color: #42b983;
+      border-color: #42b983;
+      text-decoration: none;
     }
   }
 </style>

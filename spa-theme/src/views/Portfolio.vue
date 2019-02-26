@@ -4,7 +4,7 @@
 
     <div class="projects container">
       <div class="row">
-        <div class="col-lg-4 col-md-6 project-container" v-for="project in projects">
+        <div class="col-lg-4 col-md-6 project-container" v-for="project in projects" :key="project.id">
           <div class="project" v-bind:style="{backgroundImage: 'url(' + project._embedded['wp:featuredmedia'][0].source_url + ')'}">
             <div class="overlay"></div>
             <aside class="project-meta">
@@ -51,7 +51,6 @@
         axios.get('/wp-json/wp/v2/projects?_embed')
           .then(function (response) {
             $this.projects = response.data;
-            console.log(response.data)
           })
       }
     }
