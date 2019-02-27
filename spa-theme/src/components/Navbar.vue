@@ -92,17 +92,14 @@ export default {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(66, 185, 131, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
   }
 
-  .navbar-dark .navbar-nav .nav-link{
-    color: #42b983;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
   
-  .navbar-light .navbar-nav .nav-link{
+  .navbar-dark .navbar-nav .nav-link{
     font-weight: bold;
     color: #FFF;
     border: 2px solid transparent;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
     transition: all 0.2s ease-in-out;
 
     &.router-link-exact-active {
@@ -113,6 +110,17 @@ export default {
     &:hover{
       color: #42b983;
       border-color: #42b983;
+    }
+  }
+
+  .navbar-dark .navbar-nav .nav-link{
+    @media(max-width: 991px){
+      font-size: 1rem;
+
+      &.router-link-exact-active {
+        color: #42b983;
+        border-color: transparent;
+      }
     }
   }
 </style>
