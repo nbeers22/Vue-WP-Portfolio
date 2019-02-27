@@ -1,12 +1,18 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" v-if="pageData">
       <div :class="[ !['home'].includes($route.name) ? 'col-md-10 col-lg-8' : '' ]">
         <h1 class="page-title">{{ pageTitle }}</h1>
         <aside class="green-underline" v-if="pageTitle !== ''"></aside>
         <h4 class="page-subhead" v-html="pageSubhead" v-if="pageSubhead"></h4>
       </div>
     </div>
+    <!-- Only show on home page -->
+    <ul class="icons" v-if="['home'].includes($route.name)">
+      <li class="icon" v-for="(value, key, index) in pageData" :key="index" v-if="index >= 2">
+        <a :href="value"><font-awesome-icon :icon="[ 'fab', key ]" /></a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -19,7 +25,8 @@ export default {
   data(){
     return{
       pageTitle: '',
-      pageSubhead: ''
+      pageSubhead: '',
+      pageData: false
     }
   },
   created(){
@@ -31,7 +38,8 @@ export default {
 
       axios.get(`/wp-json/wp/v2/pages?slug=${this.pageSlug}`)
         .then(function (response) {
-          $this.pageTitle = response.data[0].acf.page_title;
+          $this.pageData    = response.data[0].acf;
+          $this.pageTitle   = response.data[0].acf.page_title;
           $this.pageSubhead = response.data[0].acf.page_subhead;
         })
     }
@@ -43,9 +51,30 @@ export default {
 <style scoped lang="scss">
 
   .green-underline{
-      width: 120px;
-      border-bottom: 2px solid #42b983;
-      margin: 20px auto 30px;
+    width: 120px;
+    border-bottom: 2px solid #42b983;
+    margin: 20px auto 30px;
+  }
+
+  .icons{
+    list-style-type: none;
+    padding-left: 0;
+
+    .icon{
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    .svg-inline--fa{
+      width: 2rem;
+      height: 1.75rem;
+      color: #FFF;
+      transition: color 0.25s ease-in-out;
+
+      &:hover{
+        color: #42b983;
+      }
+    }
   }
   
 </style>

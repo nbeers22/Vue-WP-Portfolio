@@ -2,29 +2,18 @@
   <div class="page-container">
     <div class="page-content home">
       <PageTitle page-slug="home" />
-      <SocialLinks v-on:loaded="socialLoaded = true" />
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import SocialLinks from "@/components/SocialLinks.vue";
-import PageTitle from "@/components/PageTitle.vue";
-import NavBar from "@/components/Navbar.vue";
+import PageTitle   from "@/components/PageTitle.vue";
 
 export default {
   name: "home",
   components: {
-    SocialLinks,
     PageTitle,
-    NavBar,
-  },
-  data(){
-    return{
-      socialLoaded: false
-    }
-  },
+  }
 };
 </script>
 
@@ -40,16 +29,8 @@ export default {
     left: 50%;
     transform: translate(-50%,-50%);
 
-    nav.navbar, .navbar-brand{
-      display: none;
-    }
-
-    nav.navbar{
-      display: block;
-
-      li:first-child{
-        display: none;
-      }
+    .page-subhead{
+      margin-bottom: 15px;
     }
   }
 </style>
