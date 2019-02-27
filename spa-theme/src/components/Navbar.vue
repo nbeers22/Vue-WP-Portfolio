@@ -69,10 +69,14 @@ export default {
 
     @media(max-width: 991px){
       justify-content: center;
-      position: absolute;
+      position: fixed;
       width: 100%;
       background-color: #000;
       z-index: 1;
+
+      .navbar-brand{
+        display: none;
+      }
     }
   }
 

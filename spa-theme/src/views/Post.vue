@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <img :src="post._embedded['wp:featuredmedia'][0].source_url" :alt="post.title" style="margin-bottom:50px">
+          <img :src="post._embedded['wp:featuredmedia'][0].source_url" :alt="post.title" class="featured-img">
           <h1 style="margin-bottom:20px">{{ post.title.rendered }}</h1>
           <div class="project-link">
             <a :href="post.acf.project_link" target="_blank">{{ post.acf.project_button_text }}</a>
@@ -77,6 +77,15 @@
     }
   }
 
+  .featured-img{
+    margin-bottom:50px;
+    max-width: 100%;
+
+    @media(max-width: 991px){
+      margin-bottom: 30px;
+    }
+  }
+
   .post-content{
     margin: 30px 0;
 
@@ -96,5 +105,12 @@
       border-color: #42b983;
       text-decoration: none;
     }
+  }
+
+  .project-link a{
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 1.125rem;
   }
 </style>
