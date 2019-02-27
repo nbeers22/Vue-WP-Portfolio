@@ -1,15 +1,18 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center" v-if="pageData">
+    <div class="row justify-content-center" v-if="pageData.acf">
       <div :class="[ !['home'].includes($route.name) ? 'col-md-10 col-lg-8' : '' ]">
         <h1 class="page-title">{{ pageTitle }}</h1>
         <aside class="green-underline" v-if="pageTitle !== ''"></aside>
         <h4 class="page-subhead" v-html="pageSubhead" v-if="pageSubhead"></h4>
+        <div class="main-content" v-html="pageData.content.rendered" v-if="pageData.content.rendered">
+          
+        </div>
       </div>
     </div>
     <!-- Only show on home page -->
     <ul class="icons" v-if="['home'].includes($route.name)">
-      <li class="icon" v-for="(value, key, index) in pageData" :key="index" v-if="index >= 2">
+      <li class="icon" v-for="(value, key, index) in pageData.acf" :key="index" v-if="index >= 2">
         <a :href="value"><font-awesome-icon :icon="[ 'fab', key ]" /></a>
       </li>
     </ul>
@@ -38,7 +41,7 @@ export default {
 
       axios.get(`/wp-json/wp/v2/pages?slug=${this.pageSlug}`)
         .then(function (response) {
-          $this.pageData    = response.data[0].acf;
+          $this.pageData    = response.data[0];
           $this.pageTitle   = response.data[0].acf.page_title;
           $this.pageSubhead = response.data[0].acf.page_subhead;
         })
@@ -73,6 +76,25 @@ export default {
 
       &:hover{
         color: #42b983;
+      }
+    }
+  }
+
+  .main-content{
+    margin-top: 50px;
+    color: #FFF;
+
+    a,div,p,li,span{
+      color: #FFF;
+    }
+
+    a{
+      border-bottom: 1px solid #FFF;
+      transition: all 0.25s ease-in-out;
+
+      &:hover{
+        color: #42b983;
+        border-bottom: 1px solid #42b983;
       }
     }
   }

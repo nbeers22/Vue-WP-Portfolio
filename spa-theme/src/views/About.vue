@@ -20,8 +20,9 @@
 
 <style lang="scss">
   .quote{
-    margin-top: 15px;
+    margin-top: 1rem;
     font-style: italic;
-    font-size: 0.875rem;
+    font-size: 1rem;
+    font-weight: bold;
   }
 </style>
