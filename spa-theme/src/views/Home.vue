@@ -2,7 +2,6 @@
   <div class="page-container">
     <div class="page-content home">
       <PageTitle page-slug="home" />
-      <NavBar />
       <SocialLinks v-on:loaded="socialLoaded = true" />
     </div>
   </div>

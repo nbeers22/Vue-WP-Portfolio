@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navbar v-if="!['home'].includes($route.name)" />
+    <navbar />
     <transition name="slide-fade">
       <router-view />
     </transition>
@@ -32,6 +32,10 @@ export default {
 
 .page-content:not(.home){
   padding: 50px 0;
+
+  @media(max-width: 991px){
+    padding: 100px 0 50px;
+  }
 }
 // Router transition
 .slide-fade-enter-active {

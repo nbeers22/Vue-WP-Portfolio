@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="/"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@ export default {
   name: "Navbar",
   data(){
     return{
-      navMenu: []
+      navMenu: [],
     }
   },
   created(){
@@ -47,13 +47,54 @@ export default {
           $this.navMenu = response.data;
         })
     }
-  }
+  },
+  watch:{
+    $route (to, from){
+      let navToggle = document.querySelector('.navbar-toggler');
+      let navContent = document.getElementById('navbarSupportedContent');
+
+      if (navContent.classList.contains('show')) {
+        navContent.classList.remove('show');
+        navToggle.classList.add('collapsed');
+      }
+    }
+  } 
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
+  .navbar{
+
+    @media(max-width: 991px){
+      justify-content: center;
+      position: absolute;
+      width: 100%;
+      background-color: #000;
+      z-index: 1;
+    }
+  }
+
+  .navbar-dark .navbar-toggler{
+    border: 0;
+
+    &:focus{
+      outline: 0;
+    }
+  }
+
+  .navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(66, 185, 131, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+
+  .navbar-dark .navbar-nav .nav-link{
+    color: #42b983;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
   .navbar-light .navbar-nav .nav-link{
     font-weight: bold;
     color: #FFF;
