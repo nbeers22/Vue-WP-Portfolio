@@ -17,12 +17,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.b1b481b6.css rel=preload as=style>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.cb1f479f.css rel=preload as=style>
   <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/chunk-vendors.6acb9ff2.css rel=preload as=style>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/app.9558b267.js rel=preload as=script>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/chunk-vendors.cbf4d593.js rel=preload as=script>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/app.0c9f1ec7.js rel=preload as=script>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/chunk-vendors.5662a690.js rel=preload as=script>
   <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/chunk-vendors.6acb9ff2.css rel=stylesheet>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.b1b481b6.css rel=stylesheet>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.cb1f479f.css rel=stylesheet>
 
 	<?php wp_head(); ?>
 </head>

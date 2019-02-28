@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="ready">
     <form id="contact-form" v-on:submit.prevent="submitForm">
       <div class="container">
         <div class="row justify-content-center">
@@ -61,6 +61,7 @@ export default {
   name: "contactForm",
   data(){
     return{
+      ready: false,
       firstName: '',
       lastName: '',
       email: '',
@@ -69,7 +70,13 @@ export default {
       confirmationMessage: 'Thank you. Your message has been received and you will be contacted shortly.',
     }
   },
+  mounted(){
+    this.showForm();
+  },
   methods:{
+    showForm: function(){
+      this.ready = true;
+    },
     validateInput: function(event){
       let element = event.target;
 
@@ -100,7 +107,7 @@ export default {
       });
 
       // Send form data to PHP file
-      axios.post('/wp-content/themes/vue-spa/inc/contact.php', {
+      axios.post('/wp-content/themes/vue-spa/contact.php', {
           firstName : this.firstName,
           lastName  : this.lastName,
           email     : this.email,
@@ -108,6 +115,7 @@ export default {
           message   : this.message,
         })
         .then(function (response) {
+          console.log(response)
           let timer = 0;
 
           document.getElementById('form-confirmation').classList.add('show');
