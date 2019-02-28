@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form v-on:submit.prevent="submitForm">
+    <form id="contact-form" v-on:submit.prevent="submitForm">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-10 col-lg-8">
@@ -88,6 +88,18 @@ export default {
     submitForm: function(){
       let $this = this;
 
+      // Check validity of form before submission
+      let form      = document.getElementById('contact-form');
+      let allFields = form.querySelectorAll('input,textarea');
+
+      allFields.forEach(function(element){
+        if (!element.validity.valid) {
+          element.classList.add('invalid');
+          return false;
+        }
+      });
+
+      // Send form data to PHP file
       axios.post('/wp-content/themes/vue-spa/inc/contact.php', {
           firstName : this.firstName,
           lastName  : this.lastName,
@@ -97,6 +109,7 @@ export default {
         })
         .then(function (response) {
           let timer = 0;
+
           document.getElementById('form-confirmation').classList.add('show');
           setInterval(function(){
             timer++;
