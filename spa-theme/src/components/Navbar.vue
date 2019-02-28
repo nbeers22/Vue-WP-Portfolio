@@ -71,7 +71,7 @@ export default {
       justify-content: center;
       position: fixed;
       width: 100%;
-      background-color: #000;
+      background-color: #333;
       z-index: 1;
 
       .navbar-brand{

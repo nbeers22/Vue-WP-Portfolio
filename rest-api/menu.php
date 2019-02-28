@@ -19,3 +19,12 @@ add_action( 'rest_api_init', function () {
       'callback' => 'wp_menu_route',
     ) );
 } );
+
+add_filter( 'rest_projects_collection_params', 'filter_add_rest_orderby_params', 10, 1 );
+/**
+ * Add menu_order to the list of permitted orderby values
+ */
+function filter_add_rest_orderby_params( $params ) {
+  $params['orderby']['enum'][] = 'menu_order';
+  return $params;
+}

@@ -21,8 +21,6 @@
 </template>
 
 <script>
-  // @ is an alias to /src
-  import NavBar from "@/components/Navbar.vue";
   import PageTitle from "@/components/PageTitle.vue";
   import axios from 'axios';
 
@@ -30,7 +28,6 @@
 
     name: "portfolio",
     components: {
-      NavBar,
       PageTitle
     },
     data(){
@@ -48,7 +45,7 @@
       getProjects: function(){
         let $this = this;
 
-        axios.get('/wp-json/wp/v2/projects?_embed')
+        axios.get('/wp-json/wp/v2/projects?_embed&orderby=menu_order&order=asc')
           .then(function (response) {
             $this.projects = response.data;
           })

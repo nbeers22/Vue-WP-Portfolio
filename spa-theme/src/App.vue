@@ -26,6 +26,14 @@ export default {
   color: #2c3e50;
 }
 
+body{
+  min-height: 100vh;
+  @media(max-width: 991px){
+    background: #000 !important;
+    background-attachment: unset !important;
+  }
+}
+
 .page-content h1,.page-content h4{
   color: #FFF;
 }
