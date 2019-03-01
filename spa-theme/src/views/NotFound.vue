@@ -1,9 +1,9 @@
 <template>
   <div class="page-container">
-    <div class="page-content home">
+    <div class="page-content home not-found">
       <h1>404</h1>
       <h3>Page Not Found</h3>
-      <router-link :to="'/'"><button class="btn-btn-primary">Go Home</button></router-link>
+      <router-link :to="'/'"><button class="btn-btn-primary"><font-awesome-icon icon="arrow-left" /> &nbsp;Go Home</button></router-link>
     </div>
   </div>
 </template>
@@ -19,6 +19,12 @@ export default {
   .page-container{
     height: 100vh;
     position: relative;
+  }
+
+  .not-found{
+    h1,h3{
+      color: #FFF;
+    }
   }
 
   .page-content.home{
