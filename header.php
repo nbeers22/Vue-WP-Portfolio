@@ -13,16 +13,28 @@
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-64782477-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-64782477-2');
+  </script>
+
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="kR5CT3IvLDMHj8SM5N_hGHPmXuGdSIkUqf-nep17268" />
+
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.cb1f479f.css rel=preload as=style>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.f8a2f5ff.css rel=preload as=style>
   <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/chunk-vendors.6acb9ff2.css rel=preload as=style>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/app.0c9f1ec7.js rel=preload as=script>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/chunk-vendors.5662a690.js rel=preload as=script>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/app.64c8122f.js rel=preload as=script>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/chunk-vendors.1d63c6f8.js rel=preload as=script>
   <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/chunk-vendors.6acb9ff2.css rel=stylesheet>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.cb1f479f.css rel=stylesheet>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.f8a2f5ff.css rel=stylesheet>
 
 	<?php wp_head(); ?>
 </head>

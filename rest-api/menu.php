@@ -12,6 +12,13 @@ function wp_menu_route( $data ) {
   return $primary_nav;
 }
 
+function getProjectTerms( $data ){
+  $terms = get_terms( array(
+      'taxonomy' => 'post_tag',
+      'hide_empty' => false,
+  ) );
+}
+
 add_action( 'rest_api_init', function () {
   // /wp-json/nav/v1/menus/{menu_slug}
     register_rest_route( 'nav/v1', '/menus/(?P<id>[a-zA-Z0-9_-]+)', array(

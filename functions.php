@@ -130,9 +130,9 @@ function vue_spa_scripts() {
 	wp_enqueue_script( 'vue-spa-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 	
   // Uncomment after build in production
-  wp_enqueue_script( 'vue-spa-main', get_template_directory_uri() . '/spa-theme/dist/js/app.0c9f1ec7.js', array(), '20151215', true );
+  wp_enqueue_script( 'vue-spa-main', get_template_directory_uri() . '/spa-theme/dist/js/app.64c8122f.js', array(), '20151215', true );
 
-	wp_enqueue_script( 'vue-spa-chunk', get_template_directory_uri() . '/spa-theme/dist/js/chunk-vendors.5662a690.js', array(), '20151215', true );
+	wp_enqueue_script( 'vue-spa-chunk', get_template_directory_uri() . '/spa-theme/dist/js/chunk-vendors.1d63c6f8.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'vue-spa-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
