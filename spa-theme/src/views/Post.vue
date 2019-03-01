@@ -2,7 +2,7 @@
   <div class="page-content">
     <div class="container">
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12" v-if="post">
           <img :src="post._embedded['wp:featuredmedia'][0].source_url" :alt="post.title" class="featured-img">
           <h1 style="margin-bottom:20px">{{ post.title.rendered }}</h1>
           <div class="project-link">
