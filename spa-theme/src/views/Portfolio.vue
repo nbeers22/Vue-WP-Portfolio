@@ -1,23 +1,21 @@
 <template>
   <div class="page-content">
-    <PageTitle page-slug="portfolio" />
+    <PageTitle page-slug="portfolio" v-if="projects" />
 
     <div class="container" style="margin-top: 20px">
       <div class="row">
         <div class="col-sm-12">
           <ul id="categories" class="categories">
-            <li>Filter:</li>
-            <li><button class="btn-primary activeCat" @click="changeActiveCategory">All</button></li>
+            <li id="first-li" style="display: none"><button class="btn-primary activeCat" @click="changeActiveCategory">All</button></li>
             <li v-for="cat in categories"><button class="btn-primary" @click="changeActiveCategory">{{ cat.name }}</button></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <div class="projects container">
-      <div id="grid" class="row">
-        <div class="col-lg-4 col-md-6 project-container grid__brick" v-for="project in projectsFiltered"
-        :data-categories="project.categories" :key="project.id">
+    <div class="projects container" v-if="categories">
+      <transition-group name="list-complete" tag="div">
+        <div class="project-container list-complete-item" v-for="project in projectsFiltered" :key="project.id">
           <div class="project" v-bind:style="{backgroundImage: 'url(' + project._embedded['wp:featuredmedia'][0].source_url + ')'}">
             <div class="overlay"></div>
             <aside class="project-meta">
@@ -28,8 +26,7 @@
             </aside>
           </div>
         </div>
-        <div class="col-1 my-sizer-element"></div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -49,13 +46,12 @@
       return{
         projects: [],
         projectsFiltered: [],
-        categories: [],
+        categories: false,
         activeCat: ''
       }
     },
     created(){
       this.getProjects();
-      this.getCategories();
     },
     filters: {
       
@@ -68,7 +64,7 @@
           .then(function (response) {
             $this.projects = response.data;
             $this.projectsFiltered = response.data;
-            // console.log(response.data)
+            $this.getCategories();
           })
       },
       getCategories: function(){
@@ -77,7 +73,7 @@
         axios.get('/wp-json/wp/v2/categories?hide_empty=true')
           .then(function (response) {
             $this.categories = response.data;
-            // console.log($this.categories)
+            document.getElementById('first-li').classList.add('show-li');
           });
       },
       changeActiveCategory(event){
@@ -118,6 +114,33 @@
 
   .project-container{
     padding: 15px;
+    display: inline-block;
+    transition: all;
+    width: 33%;
+    float: left;
+
+    @media(max-width: 991px){
+      width: 50%;
+    }
+
+    @media(max-width: 767px){
+      width: 100%;
+    }
+  }
+
+  #first-li.show-li{
+    display: block !important;
+  }
+
+  .list-complete-item {
+    transition: all 1s;
+  }
+  .list-complete-enter, .list-complete-leave-to{
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  .list-complete-leave-active {
+    position: absolute;
   }
 
   #categories{
@@ -125,6 +148,7 @@
     display: flex;
     padding-left: 0;
     justify-content: center;
+    flex-wrap: wrap;
 
     li:first-of-type{
       color: #FFF;
@@ -133,7 +157,7 @@
     }
 
     li{
-      margin-right: 10px;
+      margin: 0 5px 10px;
       display: flex;
       align-items: center;
     }
