@@ -42,8 +42,8 @@ export default {
       axios.get(`/wp-json/wp/v2/pages?slug=${this.pageSlug}`)
         .then(function (response) {
           $this.pageData    = response.data[0];
-          $this.pageTitle   = response.data[0].acf.page_title;
-          $this.pageSubhead = response.data[0].acf.page_subhead;
+          $this.pageTitle   = $this.pageData.acf.page_title;
+          $this.pageSubhead = $this.pageData.acf.page_subhead;
         })
     }
   }

@@ -22,18 +22,11 @@
 </template>
 
 <script>
-  // @ is an alias to /src
-  import NavBar from "@/components/Navbar.vue";
-  import PageTitle from "@/components/PageTitle.vue";
   import axios from 'axios';
 
   export default {
 
     name: "post",
-    components: {
-      NavBar,
-      PageTitle
-    },
     data(){
       return{
         post: false
