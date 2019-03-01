@@ -2,9 +2,22 @@
   <div class="page-content">
     <PageTitle page-slug="portfolio" />
 
-    <div class="projects container">
+    <div class="container" style="margin-top: 20px">
       <div class="row">
-        <div class="col-lg-4 col-md-6 project-container" v-for="project in projects" :key="project.id">
+        <div class="col-sm-12">
+          <ul id="categories" class="categories">
+            <li>Filter:</li>
+            <li><button class="btn-primary activeCat" @click="changeActiveCategory">All</button></li>
+            <li v-for="cat in categories"><button class="btn-primary" @click="changeActiveCategory">{{ cat.name }}</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="projects container">
+      <div id="grid" class="row">
+        <div class="col-lg-4 col-md-6 project-container grid__brick" v-for="project in projectsFiltered"
+        :data-categories="project.categories" :key="project.id">
           <div class="project" v-bind:style="{backgroundImage: 'url(' + project._embedded['wp:featuredmedia'][0].source_url + ')'}">
             <div class="overlay"></div>
             <aside class="project-meta">
@@ -15,6 +28,7 @@
             </aside>
           </div>
         </div>
+        <div class="col-1 my-sizer-element"></div>
       </div>
     </div>
   </div>
@@ -23,6 +37,7 @@
 <script>
   import PageTitle from "@/components/PageTitle.vue";
   import axios from 'axios';
+  // import Shuffle from 'shufflejs';
 
   export default {
 
@@ -32,11 +47,15 @@
     },
     data(){
       return{
-        projects: []
+        projects: [],
+        projectsFiltered: [],
+        categories: [],
+        activeCat: ''
       }
     },
     created(){
       this.getProjects();
+      this.getCategories();
     },
     filters: {
       
@@ -45,10 +64,51 @@
       getProjects: function(){
         let $this = this;
 
-        axios.get('/wp-json/wp/v2/projects?_embed&orderby=menu_order&order=asc')
+        axios.get('/wp-json/wp/v2/projects?_embed=1&orderby=menu_order&order=asc')
           .then(function (response) {
             $this.projects = response.data;
+            $this.projectsFiltered = response.data;
+            // console.log(response.data)
           })
+      },
+      getCategories: function(){
+        let $this = this;
+
+        axios.get('/wp-json/wp/v2/categories?hide_empty=true')
+          .then(function (response) {
+            $this.categories = response.data;
+            // console.log($this.categories)
+          });
+      },
+      changeActiveCategory(event){
+        let clickedBtn = event.target;
+        let cats = document.getElementById('categories').querySelectorAll('.btn-primary');
+        cats.forEach(function(element){
+          element.classList.remove('activeCat');
+        });
+        clickedBtn.classList.add('activeCat');
+        this.filterProjects(clickedBtn.innerHTML);
+      },
+      showAllProjects: function(){
+        this.projectsFiltered = this.projects;
+      },
+      filterProjects: function(category){
+        let catNames = [];
+
+        if (category === "All") {
+          this.showAllProjects();
+          return false;
+        }
+
+        this.projects.forEach(function(project){
+          project._embedded['wp:term'][0].forEach(function(term){
+            if (term.name === category) {
+              catNames.push(project);
+            }
+          });
+        });
+
+        this.projectsFiltered = catNames;
       }
     }
   };
@@ -58,6 +118,38 @@
 
   .project-container{
     padding: 15px;
+  }
+
+  #categories{
+    list-style-type: none;
+    display: flex;
+    padding-left: 0;
+    justify-content: center;
+
+    li:first-of-type{
+      color: #FFF;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+
+    li{
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-primary{
+      padding: 5px 15px;
+      border-radius: 5px;
+      box-shadow: none;
+      outline: none;
+
+      &.activeCat{
+        background-color: #FFF;
+        border: 2px solid #42b983;
+        color: #42b983;
+      }
+    }
   }
 
   .project{
