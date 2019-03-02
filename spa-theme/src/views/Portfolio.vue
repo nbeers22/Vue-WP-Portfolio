@@ -1,6 +1,6 @@
 <template>
   <div class="page-content">
-    <PageTitle page-slug="portfolio" v-if="projects" />
+    <PageTitle page-slug="portfolio" />
 
     <div class="container" style="margin-top: 20px">
       <div class="row">
@@ -11,6 +11,11 @@
           </ul>
         </div>
       </div>
+    </div>
+
+    <div class="text-center" v-if="loading">
+      <img src="/wp-content/themes/vue-spa/images/loading.gif" alt="Loading Projects">
+      <h4 style="color:#FFF">LOADING PROJECTS</h4>
     </div>
 
     <div class="projects container" v-if="categories">
@@ -46,7 +51,8 @@
         projects: [],
         projectsFiltered: [],
         categories: false,
-        activeCat: ''
+        activeCat: '',
+        loading: true,
       }
     },
     created(){
@@ -65,6 +71,7 @@
         axios.get('/wp-json/wp/v2/categories?hide_empty=true')
           .then( response => {
             this.categories = response.data;
+            this.loading = false;
             document.getElementById('first-li').classList.add('show-li');
           });
       },

@@ -4,15 +4,18 @@
     <transition name="slide-fade">
       <router-view />
     </transition>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   components:{
-    Navbar
+    Navbar,
+    Footer
   },
 };
 </script>
@@ -56,5 +59,15 @@ body{
 /* .slide-fade-leave-active below version 2.1.8 */ {
   transform: translateX(40px);
   opacity: 0;
+}
+
+#colophon{
+  background-color: #333;
+  padding: 50px 0;
+  text-align: center;
+  color: #FFF;
+  font-size: 14px;
+  clear: both;
+  background-color: transparent;
 }
 </style>
