@@ -34,7 +34,6 @@
 <script>
   import PageTitle from "@/components/PageTitle.vue";
   import axios from 'axios';
-  // import Shuffle from 'shufflejs';
 
   export default {
 
@@ -53,40 +52,30 @@
     created(){
       this.getProjects();
     },
-    filters: {
-      
-    },
     methods:{
       getProjects: function(){
-        let $this = this;
-
         axios.get('/wp-json/wp/v2/projects?_embed=1&orderby=menu_order&order=asc')
-          .then(function (response) {
-            $this.projects = response.data;
-            $this.projectsFiltered = response.data;
-            $this.getCategories();
-          })
+          .then( response => {
+            this.projects = response.data;
+            this.projectsFiltered = response.data;
+            this.getCategories();
+          });
       },
       getCategories: function(){
-        let $this = this;
-
         axios.get('/wp-json/wp/v2/categories?hide_empty=true')
-          .then(function (response) {
-            $this.categories = response.data;
+          .then( response => {
+            this.categories = response.data;
             document.getElementById('first-li').classList.add('show-li');
           });
       },
       changeActiveCategory(event){
         let clickedBtn = event.target;
         let cats = document.getElementById('categories').querySelectorAll('.btn-primary');
-        cats.forEach(function(element){
+        cats.forEach( element => {
           element.classList.remove('activeCat');
         });
         clickedBtn.classList.add('activeCat');
         this.filterProjects(clickedBtn.innerHTML);
-      },
-      showAllProjects: function(){
-        this.projectsFiltered = this.projects;
       },
       filterProjects: function(category){
         let catNames = [];
@@ -96,8 +85,8 @@
           return false;
         }
 
-        this.projects.forEach(function(project){
-          project._embedded['wp:term'][0].forEach(function(term){
+        this.projects.forEach( project => {
+          project._embedded['wp:term'][0].forEach( term =>{
             if (term.name === category) {
               catNames.push(project);
             }
@@ -105,7 +94,21 @@
         });
 
         this.projectsFiltered = catNames;
-      }
+      },
+      showAllProjects: function(){
+        // Shows all projects and shuffles them at same time
+        let shuffledProjects = [];
+        const length         = this.projects.length;
+
+        for(var i = 0;i < length;i++){
+          let randomIndex = Math.floor(Math.random() * this.projects.length);
+
+          shuffledProjects.push(this.projects[randomIndex]);
+          this.projects.splice(randomIndex, 1);
+        }
+        this.projectsFiltered = shuffledProjects;
+        this.projects = this.projectsFiltered;
+      },
     }
   };
 </script>
