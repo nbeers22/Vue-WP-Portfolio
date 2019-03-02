@@ -115,7 +115,6 @@ export default {
           message   : this.message,
         })
         .then(function (response) {
-          console.log(response)
           let timer = 0;
 
           document.getElementById('form-confirmation').classList.add('show');
@@ -127,7 +126,7 @@ export default {
           }, 1000);
         })
         .catch(function (error) {
-          console.log(error);
+          alert(error);
         });
     }
   }
@@ -149,9 +148,8 @@ export default {
     text-align: center;
     width: 90%;
     max-width: 400px;
-    height: 0;
     position: absolute;
-    top: 40%;
+    top: 35%;
     left: 50%;
     opacity: 0;
     max-height: 0;
