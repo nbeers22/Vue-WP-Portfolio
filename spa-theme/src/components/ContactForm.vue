@@ -36,14 +36,18 @@
                 </div>
               </div>
               <div class="col-md-12 text-center">
-                <input type="submit" value="Submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div id="form-confirmation">
-        <h4>{{ confirmationMessage }}</h4>
+        <div id="sending-form-data" v-if="sendingFormData">
+          <img src="/wp-content/themes/vue-spa/images/loading.gif" alt="Loading Projects" style="max-width: 100px">
+          <h6 style="color:#FFF">SENDING MESSAGE</h6>
+        </div>
+        <h4 v-if="formDataSent">{{ confirmationMessage }}</h4>
       </div>
     </form>
   </div>
@@ -63,7 +67,9 @@ export default {
       company: '',
       message: '',
       confirmationMessage: 'Thank you. Your message has been received and you will be contacted shortly.',
-      autoFilled: 'is-autofilled'
+      autoFilled: 'is-autofilled',
+      sendingFormData: false,
+      formDataSent: false
     }
   },
   mounted(){
@@ -122,6 +128,9 @@ export default {
         }
       });
 
+      document.getElementById('form-confirmation').classList.add('show');
+      this.sendingFormData = true;
+
       // Send form data to PHP file
       axios.post('/wp-content/themes/vue-spa/contact.php', {
           firstName : this.firstName,
@@ -132,12 +141,14 @@ export default {
         })
         .then(function (response) {
           let timer = 0;
+          $this.sendingFormData = false;
+          $this.formDataSent = true;
 
-          document.getElementById('form-confirmation').classList.add('show');
           setInterval(function(){
             timer++;
             if (timer === 3) {
               document.getElementById('form-confirmation').classList.remove('show');
+              $this.formDataSent = false;
             }
           }, 1000);
         })
@@ -154,6 +165,11 @@ export default {
 <style scoped lang="scss">
   form{
     position: relative;
+
+    .container{
+      position: relative;
+      // z-index: 2;
+    }
   }
 
   .form-group{
@@ -256,7 +272,7 @@ export default {
     width: 90%;
     max-width: 400px;
     position: absolute;
-    top: 35%;
+    top: -35%;
     left: 50%;
     opacity: 0;
     max-height: 0;
@@ -265,8 +281,13 @@ export default {
     transition: all 0.35s linear;
 
     &.show{
+      top: 35%;
       max-height: 300px;
       opacity: 1;
+
+      @media(max-width: 767px){
+        top: 55%;
+      }
     }
 
     h4{
