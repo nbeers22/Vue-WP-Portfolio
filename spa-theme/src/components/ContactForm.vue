@@ -7,37 +7,32 @@
             <div class="row form-container">
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" id="first-name" name="first_name" class="form-control form-control-lg" placeholder="First Name *" @keyup="validateInput" required v-model="firstName">
-                  <img id="valid" src="/wp-content/themes/vue-spa/images/check-circle-solid.png" alt="Valid">
-                  <img id="invalid" src="/wp-content/themes/vue-spa/images/times-circle-solid.png" alt="Not Valid">
+                  <input type="text" id="first-name" name="first_name" class="form-control form-control-lg" @keyup="validateInput" required v-model="firstName">
+                  <label for="first-name">First Name *</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" name="last_name" class="form-control form-control-lg" placeholder="Last Name *" @keyup="validateInput" required v-model="lastName">
-                  <img id="valid" src="/wp-content/themes/vue-spa/images/check-circle-solid.png" alt="Valid">
-                  <img id="invalid" src="/wp-content/themes/vue-spa/images/times-circle-solid.png" alt="Not Valid">
+                  <input type="text" name="last_name" id="last-name" class="form-control form-control-lg" @keyup="validateInput" required v-model="lastName">
+                  <label for="last-name">Last Name *</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control form-control-lg" placeholder="Email *" required @keyup="validateInput" v-model="email">
-                  <img id="valid" src="/wp-content/themes/vue-spa/images/check-circle-solid.png" alt="Valid">
-                  <img id="invalid" src="/wp-content/themes/vue-spa/images/times-circle-solid.png" alt="Not Valid">
+                  <input type="email" name="email" class="form-control form-control-lg" id="email" required @keyup="validateInput" v-model="email">
+                  <label for="email">Email *</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" name="company" class="form-control form-control-lg" placeholder="Company (optional)" @keyup="validateInput" v-model="company">
-                  <img id="valid" src="/wp-content/themes/vue-spa/images/check-circle-solid.png" alt="Valid">
-                  <img id="invalid" src="/wp-content/themes/vue-spa/images/times-circle-solid.png" alt="Not Valid">
+                  <input type="text" name="company" class="form-control form-control-lg" id="company" @keyup="validateInput" v-model="company">
+                  <label for="company">Company</label>
                 </div>
               </div>
               <div class="col-md-12">
-                <div class="form-group">
-                  <textarea class="form-control" id="messaage" name="message" rows="6" placeholder="Message *" @keyup="validateInput" required v-model="message"></textarea>
-                  <img id="valid" src="/wp-content/themes/vue-spa/images/check-circle-solid.png" alt="Valid">
-                  <img id="invalid" src="/wp-content/themes/vue-spa/images/times-circle-solid.png" alt="Not Valid">
+                <div class="form-group textarea">
+                  <textarea class="form-control" id="messaage" name="message" rows="6" @keyup="validateInput" required v-model="message"></textarea>
+                  <label for="message">Message *</label>
                 </div>
               </div>
               <div class="col-md-12 text-center">
@@ -68,27 +63,48 @@ export default {
       company: '',
       message: '',
       confirmationMessage: 'Thank you. Your message has been received and you will be contacted shortly.',
+      autoFilled: 'is-autofilled'
     }
   },
   mounted(){
     this.showForm();
+    this.autoCompleteListener();
   },
   methods:{
     showForm: function(){
       this.ready = true;
+
+    },
+    autoCompleteListener: function(){
+      let $this = this;
+      setTimeout(function(){
+        const AUTOFILLED = 'is-autofilled'
+        const onAutoFillStart = (el) => el.classList.add(AUTOFILLED)
+        const onAutoFillCancel = (el) => el.classList.remove(AUTOFILLED)
+        const onAnimationStart = ({ target, animationName }) => {
+          if (/onAutoFillStart/.test(animationName)) {
+            return onAutoFillStart(target)
+          }else if(/onAutoFillCancel/.test(animationName)){
+            return onAutoFillCancel(target)
+          }
+        }
+        document.querySelectorAll('input,textarea').forEach( element => {
+          element.addEventListener('animationstart', onAnimationStart)
+        });
+      },1000)
     },
     validateInput: function(event){
       let element = event.target;
 
       element.addEventListener("keyup", function (event) {
-        if (element.validity.valid) {
-          this.parentElement.querySelector('#invalid').classList.remove('invalid');
-          this.parentElement.querySelector('#valid').classList.add('valid');
-          this.style.border = '2px solid #42b983';
+        this.value !== '' ? this.classList.add('filled') :  this.classList.remove('filled');
+
+        if (this.validity.valid) {
+          this.classList.add('valid')
+          this.classList.remove('invalid');
         } else {
-          this.parentElement.querySelector('#valid').classList.remove('valid');
-          this.parentElement.querySelector('#invalid').classList.add('invalid');
-          this.style.border = '2px solid #ff0000';
+          this.classList.add('invalid');
+          this.classList.remove('valid')
         }
       });
     },
@@ -138,6 +154,97 @@ export default {
 <style scoped lang="scss">
   form{
     position: relative;
+  }
+
+  .form-group{
+    background-color: #FFF;
+    border-radius: 5px;
+
+    label{
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-bottom: 0;
+      transition: all 0.2s ease-out;
+    }
+
+    &.textarea label{
+      top: 15%;
+    }
+
+    input{
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      font-size: 1rem;
+      padding: 1.375rem 2rem 0.5rem 0.75rem;
+      height: 3.125rem;
+    }
+
+    input.valid,textarea.valid,input.is-autofilled,textarea.is-autofilled{
+      background-image: url(/wp-content/themes/vue-spa/images/check-circle-solid.png) !important;
+      border: 2px solid #42b983;
+
+      & + label{
+        color: #42b983;
+        font-weight: bold;
+      }
+    }
+
+    input.invalid + label, textarea.invalid + label{
+      color: #FF0000;
+      font-weight: bold;
+    }
+
+    textarea{
+      background-position: right 10px top 10px;
+      background-repeat: no-repeat;
+      padding: 2rem 2.5rem 1rem 0.75rem;
+    }
+
+    input.invalid, textarea.invalid{
+      background-image: url(/wp-content/themes/vue-spa/images/times-circle-solid.png) !important;
+      border: 2px solid #ff0000;
+    }
+
+    input:focus + label, input.filled + label, input.is-autofilled + label{
+      font-size: 10px;
+      text-transform: uppercase;
+      top: 27%;
+    }
+
+    textarea:focus + label, textarea.filled + label, textarea.is-autofilled + label{
+      font-size: 10px;
+      text-transform: uppercase;
+      top: 10%;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover
+    textarea:-webkit-autofill:focus, {
+      border: 1px solid #42b983;
+      -webkit-text-fill-color: #333;
+      background-color: #FFF;
+    }
+
+    @keyframes onAutoFillStart {  from {/**/}  to {/**/}}
+    @keyframes onAutoFillCancel {  from {/**/}  to {/**/}}
+    input:-webkit-autofill {
+        // Expose a hook for JavaScript when autofill is shown
+        // JavaScript can capture 'animationstart' events
+        animation-name: onAutoFillStart;
+        
+        // Make the background color become yellow really slowly
+        transition: background-color 50000s ease-in-out 0s;
+    }
+    input:not(:-webkit-autofill) {
+        // Expose a hook for JS onAutoFillCancel
+        // JavaScript can capture 'animationstart' events
+        animation-name: onAutoFillCancel;
+    }
   }
 
   #form-confirmation{
