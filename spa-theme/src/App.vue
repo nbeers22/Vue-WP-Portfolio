@@ -27,6 +27,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100vh;
+  position: relative;
 }
 
 body{
@@ -59,15 +61,5 @@ body{
 /* .slide-fade-leave-active below version 2.1.8 */ {
   transform: translateX(40px);
   opacity: 0;
-}
-
-#colophon{
-  background-color: #333;
-  padding: 50px 0;
-  text-align: center;
-  color: #FFF;
-  font-size: 14px;
-  clear: both;
-  background-color: transparent;
 }
 </style>

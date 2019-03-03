@@ -16,33 +16,10 @@ export default {
 </script>
 
 <style lang="scss">
-  .page-container{
-    height: 100vh;
-    position: relative;
-  }
 
   .not-found{
     h1,h3{
       color: #FFF;
-    }
-  }
-
-  .page-content.home{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-
-    nav.navbar, .navbar-brand{
-      display: none;
-    }
-
-    nav.navbar{
-      display: block;
-
-      li:first-child{
-        display: none;
-      }
     }
   }
 </style>

@@ -7,7 +7,7 @@
             <div class="row form-container">
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" name="first_name" class="form-control form-control-lg" placeholder="First Name *" @keyup="validateInput" required v-model="firstName">
+                  <input type="text" id="first-name" name="first_name" class="form-control form-control-lg" placeholder="First Name *" @keyup="validateInput" required v-model="firstName">
                   <img id="valid" src="/wp-content/themes/vue-spa/images/check-circle-solid.png" alt="Valid">
                   <img id="invalid" src="/wp-content/themes/vue-spa/images/times-circle-solid.png" alt="Not Valid">
                 </div>

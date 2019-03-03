@@ -18,10 +18,6 @@ export default {
 </script>
 
 <style lang="scss">
-  .page-container{
-    height: 100vh;
-    position: relative;
-  }
 
   .page-content.home{
     position: absolute;

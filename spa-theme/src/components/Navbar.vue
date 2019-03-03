@@ -67,6 +67,8 @@ export default {
 
   .navbar{
 
+    max-width: 100vw;
+
     @media(max-width: 991px){
       justify-content: center;
       position: fixed;
