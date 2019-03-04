@@ -7,32 +7,32 @@
             <div class="row form-container">
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" id="first-name" name="first_name" class="form-control form-control-lg" @keyup="validateInput" required v-model="firstName">
-                  <label for="first-name">First Name *</label>
+                  <input type="text" id="first-name" name="first_name" class="form-control form-control-lg" :placeholder="!chromeBrowser ? 'First Name *' : ''" @keyup="validateInput" required v-model="firstName">
+                  <label v-if="chromeBrowser" for="first-name">First Name *</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" name="last_name" id="last-name" class="form-control form-control-lg" @keyup="validateInput" required v-model="lastName">
-                  <label for="last-name">Last Name *</label>
+                  <input type="text" name="last_name" id="last-name" class="form-control form-control-lg" :placeholder="!chromeBrowser ? 'Last Name *' : ''" @keyup="validateInput" required v-model="lastName">
+                  <label v-if="chromeBrowser" for="last-name">Last Name *</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control form-control-lg" id="email" required @keyup="validateInput" v-model="email">
-                  <label for="email">Email *</label>
+                  <input type="email" name="email" class="form-control form-control-lg" :placeholder="!chromeBrowser ? 'Email *' : ''" id="email" required @keyup="validateInput" v-model="email">
+                  <label v-if="chromeBrowser" for="email">Email *</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" name="company" class="form-control form-control-lg" id="company" @keyup="validateInput" v-model="company">
-                  <label for="company">Company</label>
+                  <input type="text" name="company" class="form-control form-control-lg" :placeholder="!chromeBrowser ? 'Company' : ''" id="company" @keyup="validateInput" v-model="company">
+                  <label v-if="chromeBrowser" for="company">Company</label>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group textarea">
-                  <textarea class="form-control" id="messaage" name="message" rows="6" @keyup="validateInput" required v-model="message"></textarea>
-                  <label for="message">Message *</label>
+                  <textarea class="form-control" id="messaage" name="message" rows="6" :placeholder="!chromeBrowser ? 'Message *' : ''" @keyup="validateInput" required v-model="message"></textarea>
+                  <label v-if="chromeBrowser" for="message">Message *</label>
                 </div>
               </div>
               <div class="col-md-12 text-center">
@@ -67,37 +67,19 @@ export default {
       company: '',
       message: '',
       confirmationMessage: 'Thank you. Your message has been received and you will be contacted shortly.',
-      autoFilled: 'is-autofilled',
       sendingFormData: false,
-      formDataSent: false
+      formDataSent: false,
+      chromeBrowser: false
     }
   },
   mounted(){
     this.showForm();
-    this.autoCompleteListener();
   },
   methods:{
     showForm: function(){
       this.ready = true;
 
-    },
-    autoCompleteListener: function(){
-      let $this = this;
-      setTimeout(function(){
-        const AUTOFILLED = 'is-autofilled'
-        const onAutoFillStart = (el) => el.classList.add(AUTOFILLED)
-        const onAutoFillCancel = (el) => el.classList.remove(AUTOFILLED)
-        const onAnimationStart = ({ target, animationName }) => {
-          if (/onAutoFillStart/.test(animationName)) {
-            return onAutoFillStart(target)
-          }else if(/onAutoFillCancel/.test(animationName)){
-            return onAutoFillCancel(target)
-          }
-        }
-        document.querySelectorAll('input,textarea').forEach( element => {
-          element.addEventListener('animationstart', onAnimationStart)
-        });
-      },1000)
+      navigator.userAgent.indexOf("Chrome") !== -1 ? this.chromeBrowser = true : document.querySelector('body').classList.add('not-chrome')
     },
     validateInput: function(event){
       let element = event.target;
@@ -172,6 +154,20 @@ export default {
     }
   }
 
+  body.not-chrome{
+
+    .form-group{
+
+      input{
+        padding: 0.5rem 2rem 0.5rem 0.75rem;
+      }
+
+      textarea{
+        padding: 1rem 2.5rem 1rem 0.75rem;
+      }
+    }
+  }
+
   .form-group{
     background-color: #FFF;
     border-radius: 5px;
@@ -235,15 +231,46 @@ export default {
       top: 10%;
     }
 
+    input:-webkit-autofill + label{
+      font-size: 10px;
+      text-transform: uppercase;
+      top: 27%;
+      color: #42b983;
+      font-weight: bold;
+    }
+
+    input:-moz-autofill + label{
+      font-size: 10px;
+      text-transform: uppercase;
+      top: 27%;
+      color: #42b983;
+      font-weight: bold;
+    }
+
+    textarea:-webkit-autofill + label{
+      font-size: 10px;
+      text-transform: uppercase;
+      top: 10%;
+      color: #42b983;
+      font-weight: bold;
+    }
+
     input:-webkit-autofill,
     input:-webkit-autofill:hover, 
-    input:-webkit-autofill:focus
+    input:-webkit-autofill:focus,
     textarea:-webkit-autofill,
-    textarea:-webkit-autofill:hover
-    textarea:-webkit-autofill:focus, {
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    input:-moz-autofill,
+    input:-moz-autofill:hover, 
+    input:-moz-autofill:focus,
+    textarea:-moz-autofill,
+    textarea:-moz-autofill:hover,
+    textarea:-moz-autofill:focus {
       border: 1px solid #42b983;
       -webkit-text-fill-color: #333;
       background-color: #FFF;
+      background-image: url(/wp-content/themes/vue-spa/images/check-circle-solid.png) !important;
     }
 
     @keyframes onAutoFillStart {  from {/**/}  to {/**/}}
@@ -255,8 +282,23 @@ export default {
         
         // Make the background color become yellow really slowly
         transition: background-color 50000s ease-in-out 0s;
+        border: 2px solid #42b983;
     }
     input:not(:-webkit-autofill) {
+        // Expose a hook for JS onAutoFillCancel
+        // JavaScript can capture 'animationstart' events
+        animation-name: onAutoFillCancel;
+    }
+    input:-moz-autofill {
+        // Expose a hook for JavaScript when autofill is shown
+        // JavaScript can capture 'animationstart' events
+        animation-name: onAutoFillStart;
+        
+        // Make the background color become yellow really slowly
+        transition: background-color 50000s ease-in-out 0s;
+        border: 2px solid #42b983;
+    }
+    input:not(:-moz-autofill) {
         // Expose a hook for JS onAutoFillCancel
         // JavaScript can capture 'animationstart' events
         animation-name: onAutoFillCancel;
