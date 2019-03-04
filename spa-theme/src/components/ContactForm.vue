@@ -78,8 +78,9 @@ export default {
   methods:{
     showForm: function(){
       this.ready = true;
+      console.log(navigator.userAgent)
 
-      navigator.userAgent.indexOf("Chrome") !== -1 ? this.chromeBrowser = true : document.querySelector('body').classList.add('not-chrome')
+      navigator.userAgent.toLowerCase().indexOf("webkit") !== -1 ? this.chromeBrowser = true : document.querySelector('body').classList.add('not-chrome')
     },
     validateInput: function(event){
       let element = event.target;
