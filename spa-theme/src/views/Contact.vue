@@ -1,7 +1,10 @@
 <template>
   <div class="page-content">
-    <PageTitle page-slug="contact" />
-    <ContactForm />
+    <div class="loading" v-if="!pageTitleLoaded">
+      <img src="/wp-content/themes/vue-spa/images/loading.gif" alt="Loading Projects">
+    </div>
+    <PageTitle v-once page-slug="contact" v-on:content-loaded="pageTitleLoaded = $event" />
+    <ContactForm v-if="pageTitleLoaded" v-cloak />
   </div>
 </template>
 
@@ -14,11 +17,20 @@
     components: {
       PageTitle,
       ContactForm
-    }
+    },
+    data() {
+      return{
+        pageTitleLoaded: false,
+      }
+    },
 	};
 </script>
 
 <style lang="scss">
+  [v-cloak]{
+    display: none;
+  }
+
   .form-container{
     margin-top: 30px;
 

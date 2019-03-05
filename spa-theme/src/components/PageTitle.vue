@@ -44,6 +44,7 @@ export default {
           $this.pageData    = response.data[0];
           $this.pageTitle   = $this.pageData.acf.page_title;
           $this.pageSubhead = $this.pageData.acf.page_subhead;
+          $this.$emit('content-loaded',true);
         })
     }
   }

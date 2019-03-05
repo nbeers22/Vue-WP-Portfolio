@@ -1,13 +1,13 @@
 <template>
   <div class="page-container">
     <div class="page-content home">
-      <PageTitle page-slug="home" />
+      <PageTitle v-once page-slug="home" />
     </div>
   </div>
 </template>
 
 <script>
-import PageTitle   from "@/components/PageTitle.vue";
+import PageTitle from "@/components/PageTitle.vue";
 
 export default {
   name: "home",

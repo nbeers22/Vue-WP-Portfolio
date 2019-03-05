@@ -1,6 +1,6 @@
 <template>
   <div class="page-content">
-    <PageTitle page-slug="portfolio" />
+    <PageTitle v-once page-slug="portfolio" />
 
     <div class="container" style="margin-top: 20px">
       <div class="row">
@@ -163,7 +163,6 @@
     li:first-of-type{
       color: #FFF;
       text-transform: uppercase;
-      font-size: 18px;
     }
 
     li{
