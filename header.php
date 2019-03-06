@@ -30,12 +30,12 @@
 
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.6e7b55b7.css rel=preload as=style>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.b17ea4f6.css rel=preload as=style>
   <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/chunk-vendors.6acb9ff2.css rel=preload as=style>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/app.66391a88.js rel=preload as=script>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/app.887acfc4.js rel=preload as=script>
   <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/chunk-vendors.1d63c6f8.js rel=preload as=script>
   <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/chunk-vendors.6acb9ff2.css rel=stylesheet>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.6e7b55b7.css rel=stylesheet>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.b17ea4f6.css rel=stylesheet>
 
 	<?php wp_head(); ?>
 </head>
