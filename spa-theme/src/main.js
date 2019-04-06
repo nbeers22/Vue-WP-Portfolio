@@ -4,11 +4,11 @@ import router  from "./router";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft,faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter,faLinkedin,faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faTwitter,faLinkedin,faGithub,faArrowLeft)
+library.add(faTwitter,faLinkedin,faGithub,faArrowLeft,faEnvelope)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

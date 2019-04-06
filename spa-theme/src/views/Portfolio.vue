@@ -5,9 +5,9 @@
     <div class="container" style="margin-top: 20px">
       <div class="row">
         <div class="col-sm-12">
-          <ul id="categories" class="categories">
-            <li id="first-li" style="display: none"><button class="btn-primary activeCat" @click="changeActiveCategory">All</button></li>
-            <li v-for="cat in categories"><button class="btn-primary" @click="changeActiveCategory">{{ cat.name }}</button></li>
+          <ul id="categories" class="categories" role="tablist">
+            <li id="first-li" style="display: none" role="presentation"><button class="btn-primary activeCat" @click="changeActiveCategory">All</button></li>
+            <li v-for="cat in categories" role="presentation"><button class="btn-primary" @click="changeActiveCategory">{{ cat.name }}</button></li>
           </ul>
         </div>
       </div>
