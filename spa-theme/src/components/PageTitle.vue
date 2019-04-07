@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row justify-content-center" v-if="pageData.acf">
-      <div :class="[ !['home'].includes($route.name) ? 'col-md-10 col-lg-8' : '' ]">
+      <div class="col-sm-10" :class="[ !['home'].includes($route.name) ? 'col-md-10 col-lg-8' : '' ]">
         <h1 class="page-title">{{ pageTitle }}</h1>
         <aside class="green-underline" v-if="pageTitle !== ''"></aside>
         <h4 class="page-subhead" v-html="pageSubhead" v-if="pageSubhead"></h4>
@@ -13,7 +13,10 @@
     <!-- Only show on home page -->
     <ul class="icons" v-if="['home'].includes($route.name)">
       <li class="icon" v-for="(value, key, index) in pageData.acf" :key="index" v-if="index >= 2">
-        <a :href="value"><font-awesome-icon :icon="[ 'fab', key ]" /></a>
+        <a :href="value">
+          <font-awesome-icon :icon="[ 'fab', key ]" v-if="key !== 'envelope'" />
+          <font-awesome-icon :icon="[ 'fa', key ]" v-else />
+        </a>
       </li>
     </ul>
   </div>

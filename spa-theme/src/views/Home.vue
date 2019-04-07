@@ -1,7 +1,10 @@
 <template>
   <div class="page-container">
     <div class="page-content home">
-      <PageTitle v-once page-slug="home" />
+      <div class="loading" v-if="!pageTitleLoaded">
+        <img src="/wp-content/themes/vue-spa/images/loading.gif" alt="Loading Projects">
+      </div>
+      <PageTitle v-once page-slug="home" v-on:content-loaded="pageTitleLoaded = $event" />
     </div>
   </div>
 </template>
@@ -13,6 +16,11 @@ export default {
   name: "home",
   components: {
     PageTitle,
+  },
+  data() {
+    return{
+      pageTitleLoaded: false,
+    }
   }
 };
 </script>
@@ -20,6 +28,7 @@ export default {
 <style lang="scss">
 
   .page-content.home{
+    width: 85%;
     position: absolute;
     top: 50%;
     left: 50%;

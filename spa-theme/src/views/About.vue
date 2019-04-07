@@ -1,6 +1,9 @@
 <template>
   <div class="page-content">
-    <PageTitle page-slug="about" />
+    <div class="loading" v-if="!pageTitleLoaded">
+      <img src="/wp-content/themes/vue-spa/images/loading.gif" alt="Loading Projects">
+    </div>
+    <PageTitle page-slug="about" v-on:content-loaded="pageTitleLoaded = $event" />
   </div>
 </template>
 
@@ -15,6 +18,11 @@
       NavBar,
       PageTitle
     },
+    data() {
+      return{
+        pageTitleLoaded: false,
+      }
+    }
   };
 </script>
 

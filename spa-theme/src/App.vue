@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navbar />
-    <transition name="slide-fade">
+    <transition name="fade">
       <router-view />
     </transition>
     <Footer />
@@ -29,6 +29,10 @@ export default {
   color: #2c3e50;
   min-height: 100vh;
   position: relative;
+
+  @media(max-height: 520px){
+    min-height: 500px;
+  }
 }
 
 body{
@@ -52,16 +56,16 @@ body{
 }
 
 // Router transition
-.slide-fade-enter-active {
-  transition: all .8s ease;
-}
+// .slide-fade-enter-active {
+//   transition: all .8s ease;
+// }
 
-.slide-fade-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
+// .slide-fade-leave-active {
+//   transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+// }
 
-.slide-fade-enter, .slide-fade-leave-to{
-  transform: translateX(40px);
-  opacity: 0;
-}
+// .slide-fade-enter, .slide-fade-leave-to{
+//   transform: translateX(40px);
+//   opacity: 0;
+// }
 </style>

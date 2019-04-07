@@ -1,13 +1,13 @@
 <template>
   <div class="page-content">
-    <PageTitle v-once page-slug="portfolio" />
+    <PageTitle page-slug="portfolio" />
 
     <div class="container" style="margin-top: 20px">
       <div class="row">
         <div class="col-sm-12">
           <ul id="categories" class="categories" role="tablist">
-            <li id="first-li" style="display: none" role="presentation"><button class="btn-primary activeCat" @click="changeActiveCategory">All</button></li>
-            <li v-for="cat in categories" role="presentation"><button class="btn-primary" @click="changeActiveCategory">{{ cat.name }}</button></li>
+            <li id="first-li" style="display: none" role="presentation"><button class="btn-primary activeCat" @click="changeActiveCategory" aria-selected="true">All</button></li>
+            <li v-for="cat in categories" role="presentation"><button class="btn-primary" @click="changeActiveCategory"aria-selected="false">{{ cat.name }}</button></li>
           </ul>
         </div>
       </div>
@@ -80,8 +80,10 @@
         let cats = document.getElementById('categories').querySelectorAll('.btn-primary');
         cats.forEach( element => {
           element.classList.remove('activeCat');
+          element.setAttribute('aria-selected',false);
         });
         clickedBtn.classList.add('activeCat');
+        clickedBtn.setAttribute('aria-selected',true);
         this.filterProjects(clickedBtn.innerHTML);
       },
       filterProjects: function(category){
@@ -211,6 +213,12 @@
         bottom: 28%;
         transform: translateY(-50%);
       }
+    }
+
+    .cat{
+      position: absolute;
+      top: 30px;
+      right: 0;
     }
 
     .overlay{

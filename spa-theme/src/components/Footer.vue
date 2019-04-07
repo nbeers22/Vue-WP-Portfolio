@@ -1,6 +1,7 @@
 <template>
   <footer role="contentinfo" id="colophon" class="site-footer" :class="[ ['home'].includes($route.name) ? 'footer-home' : '' ]">
-    <p>Built with love by Nathan Beers using <a href="https://vuejs.org">Vue.js</a> and the <a href="https://developer.wordpress.org/rest-api/">WordPress REST API</a></p>
+    <p>Built with love by Nathan Beers using <br><a href="https://vuejs.org" target="_blank">Vue.js</a> and the <a href="https://developer.wordpress.org/rest-api/" target="_blank">WordPress REST API</a><br></p>
+    <p>&copy; {{ currentYear }} All rights reserved.</p>
   </footer>
 </template>
 
@@ -37,13 +38,14 @@ export default {
     }
 
     a{
-      color: #42b983;;
-      border-bottom: 1px solid #42b983;
-      transition: font-weight 0.25s ease-in-out;
+      border-bottom: 1px solid #FFF;
+      color: #FFF;
+      transition: all 0.25s ease-in-out;
 
       &:hover{
         text-decoration: none;
-        font-weight: 900;
+        color: #42b983;
+        border-color: #42b983;
       }
     }
   }

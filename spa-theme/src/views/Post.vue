@@ -4,9 +4,16 @@
       <div class="row">
         <div class="col-sm-12" v-if="post">
           <img :src="post._embedded['wp:featuredmedia'][0].source_url" :alt="post.title" class="featured-img">
+        </div>
+        <div class="col-sm-10 col-lg-8 offset-sm-1 offset-lg-2">
           <h1 style="margin-bottom:20px">{{ post.title.rendered }}</h1>
           <div class="project-link">
-            <a :href="post.acf.project_link" target="_blank">{{ post.acf.project_button_text }}</a>
+            <p class="text-right">
+              <a :href="post.acf.project_link" target="_blank">{{ post.acf.project_button_text }}</a>
+            </p>
+            <p class="text-left">
+              <a v-if="post.acf.github_link" :href="post.acf.github_link" target="_blank">{{ post.acf.github_button_text }}</a>
+            </p>
           </div>
           <div class="row justify-content-center">
             <div class="col-md-8">
@@ -105,5 +112,17 @@
     font-weight: bold;
     letter-spacing: 1px;
     font-size: 1.125rem;
+    margin: 0 20px;
+  }
+
+  .project-link p{
+    display: inline-block;
+    width: 50%;
+    
+    @media(max-width: 360px){
+      width: 100%;
+      text-align: center !important;
+      margin: 10px 0;
+    }
   }
 </style>
