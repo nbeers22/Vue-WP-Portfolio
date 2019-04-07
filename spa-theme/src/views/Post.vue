@@ -5,10 +5,10 @@
         <div class="col-sm-12" v-if="post">
           <img :src="post._embedded['wp:featuredmedia'][0].source_url" :alt="post.title" class="featured-img">
         </div>
-        <div class="col-sm-10 col-lg-8 offset-sm-1 offset-lg-2">
+        <div class="col-sm-10 col-lg-8 offset-sm-1 offset-lg-2" v-if="post">
           <h1 style="margin-bottom:20px">{{ post.title.rendered }}</h1>
           <div class="project-link">
-            <p class="text-right">
+            <p class="text-right" :class="{ 'onlyp': !post.acf.github_link }">
               <a :href="post.acf.project_link" target="_blank">{{ post.acf.project_button_text }}</a>
             </p>
             <p class="text-left">
@@ -124,5 +124,11 @@
       text-align: center !important;
       margin: 10px 0;
     }
+  }
+
+  .project-link .onlyp{
+    display: block;
+    text-align: center !important;
+    width: 100%;
   }
 </style>
