@@ -56,12 +56,17 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  // Redirect if fullPath begins with a hash (ignore hashes later in path)
+  // Redirect if fullPath end with a hash
+  let length = to.fullPath.length;
+
   if (to.fullPath.includes('/#')) {
     const path = to.fullPath.split('/#')[0];
-    next(path);
-    return;
   }
+  if(to.fullPath.slice(-1) == '/'){
+    const path = to.fullPath.slice(0, to.fullPath.length - 1);;
+  }
+  next(path);
+  return;
   next();
 });
 export default router;
