@@ -25,17 +25,17 @@
 
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Personal portfolio site for Nathan Beers, Web Developer built with WordPress and Vue.js">
+  <meta name="description" content="Personal portfolio site for Nathan Beers, Web Developer, built with WordPress and Vue.js">
   <meta name="google-site-verification" content="kR5CT3IvLDMHj8SM5N_hGHPmXuGdSIkUqf-nep17268" />
 
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.b17ea4f6.css rel=preload as=style>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.828b00c2.css rel=preload as=style>
   <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/chunk-vendors.6acb9ff2.css rel=preload as=style>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/app.887acfc4.js rel=preload as=script>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/chunk-vendors.1d63c6f8.js rel=preload as=script>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/app.670bbac8.js rel=prefetch as=script>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/js/chunk-vendors.c16d8273.js rel=prefetch as=script>
   <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/chunk-vendors.6acb9ff2.css rel=stylesheet>
-  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.b17ea4f6.css rel=stylesheet>
+  <link href=<?php bloginfo('template_directory'); ?>/spa-theme/dist/css/app.828b00c2.css rel=stylesheet>
 
 	<?php wp_head(); ?>
 </head>

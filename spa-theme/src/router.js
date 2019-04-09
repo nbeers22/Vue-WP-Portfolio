@@ -9,7 +9,7 @@ import NotFound  from "./views/NotFound.vue";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: "/",
@@ -19,9 +19,6 @@ export default new Router({
     {
       path: "/about",
       name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: About
     },
     {
@@ -39,14 +36,14 @@ export default new Router({
       name: "Post",
       component: Post
     },
-    { 
+    {
       path: '*',
       name: "notfound",
       component: NotFound
     }
   ],
-  // mode: "history",
-  // base: "",
+  mode: "history",
+  base: "",
   // Prevents window from scrolling back to top
   // when navigating between components/views
   scrollBehavior(to, from, savedPosition) {
@@ -56,4 +53,61 @@ export default new Router({
       return { x: 0, y: 0 };
     }
   }
+})
+
+router.beforeEach((to, from, next) => {
+  // Redirect if fullPath begins with a hash (ignore hashes later in path)
+  if (to.fullPath.includes('/#')) {
+    const path = to.fullPath.split('/#')[0];
+    next(path);
+    return;
+  }
+  next();
 });
+export default router;
+
+// export default new Router({
+//   routes: [
+//     {
+//       path: "/",
+//       name: "home",
+//       component: Home
+//     },
+//     {
+//       path: "/about",
+//       name: "about",
+//       component: About
+//     },
+//     {
+//       path: "/contact",
+//       name: "contact",
+//       component: Contact
+//     },
+//     {
+//       path: "/portfolio",
+//       name: "portfolio",
+//       component: Portfolio
+//     },
+//     {
+//       path: "/projects/:postSlug",
+//       name: "Post",
+//       component: Post
+//     },
+//     { 
+//       path: '*',
+//       name: "notfound",
+//       component: NotFound
+//     }
+//   ],
+//   mode: "history",
+//   base: "",
+//   // Prevents window from scrolling back to top
+//   // when navigating between components/views
+//   scrollBehavior(to, from, savedPosition) {
+//     if (savedPosition) {
+//       return savedPosition;
+//     } else {
+//       return { x: 0, y: 0 };
+//     }
+//   }
+// });
